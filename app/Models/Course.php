@@ -11,16 +11,24 @@ class Course extends Model
 
     protected $fillable = [
         'title',
-        'level',
-        'duration',
-        'bonus',
-        'price',
-        'user_id', // pastikan ini dimasukkan jika kamu set secara manual
+        'description',
+        'image',
+        'tutor_id',
     ];
 
-    // Relasi ke user
-    public function user()
+    public function tutor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Tutor::class, 'tutor_id');
     }
+    // Relasi ke user
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'course_user');
+    }
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
+
 }

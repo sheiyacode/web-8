@@ -26,7 +26,7 @@
       </div>
       <div class="col-lg-6">
         <div class="contact-us-content">
-          <form id="contact-form" action="{{ route('login') }}" method="POST">
+          <form id="contact-form" action="{{ route('login.user.submit') }}" method="POST">
             @csrf
             <input type="hidden" name="role" value="user">
 

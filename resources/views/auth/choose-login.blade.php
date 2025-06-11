@@ -53,7 +53,7 @@
     <div class="container">
         <h2>Login Sebagai</h2>
         <div class="button-group">
-            <a href="{{ route('login') }}" class="button">Siswa</a>
+            <a href="{{ route('login.user') }}" class="button">Siswa</a>
             <a href="{{ route('login.tutor') }}" class="button">Tutor</a>
             <a href="{{ route('login.admin') }}" class="button">Admin</a>
         </div>

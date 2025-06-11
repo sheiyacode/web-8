@@ -284,7 +284,7 @@
                     <h4>FREE</h4>
                   </li>
                 </ul>
-                <a href="{{ asset('scholar') }}/#"><i class="fa fa-angle-right"></i></a>
+                <a href="{{ url('/register') }}"><i class="fa fa-angle-right"></i></a>
               </div>
             </div>
           </div>
@@ -313,10 +313,10 @@
                     <h6>3 Bulan</h6>
                   </li>
                   <li>
-                    <<h4>FREE</h4>
+                    <h4>FREE</h4>
                   </li>
                 </ul>
-                <a href="{{ asset('scholar') }}/#"><i class="fa fa-angle-right"></i></a>
+                <a href="{{ url('/register') }}"><i class="fa fa-angle-right"></i></a>
               </div>
             </div>
           </div>
@@ -348,7 +348,7 @@
                     <h4>FREE</h4>
                   </li>
                 </ul>
-                <a href="{{ asset('scholar') }}/#"><i class="fa fa-angle-right"></i></a>
+                <a href="{{ url('/register') }}"><i class="fa fa-angle-right"></i></a>
               </div>
             </div>
           </div>

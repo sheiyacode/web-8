@@ -5,7 +5,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a class="logo">
-                        <h1>WORDELLA-Admin</h1>
+                        <h1>WORDELLA</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Serach Start ***** -->
@@ -17,17 +17,16 @@
                     </div>
                     <!-- ***** Serach Start ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="navbar-nav ms-auto">
-                      <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.admin') }}">Dashboard</a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">Manajemen User</a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin.tutors.index') }}">Manajemen Tutor</a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin.courses.index') }}">Manajemen Kursus</a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin.quizzes.index') }}">Manajemen Quiz</a></li>
-                      {{-- <li class="nav-item"><a class="nav-link" href="{{ route('admin.reports.index') }}">Laporan</a></li> --}}
-                      <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    <ul class="nav">
+                      <li><a href="{{ route('dashboard.admin') }}">Dashboard</a></li>
+                      <li><a href="{{ route('admin.users') }}">User</a></li>
+                      <li><a href="{{ route('admin.tutors') }}">Tutor</a></li>
+                      <li><a href="{{ route('admin.course') }}">Kursus</a></li>
+                      <li><a href="{{ route('admin.quizzes') }}">Quiz</a></li>
+                      <li>
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                           @csrf
-                          <button class="btn btn-link nav-link" type="submit">Logout</button>
+                          <button type="submit" class="logout-button">Logout</button>
                         </form>
                       </li>
                     </ul>   

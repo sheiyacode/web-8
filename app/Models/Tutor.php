@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Tutor extends Model
+class Tutor extends Authenticatable
 {
-    protected $guard = 'tutor';
+    use Notifiable;
 
-    protected $fillable = ['name', 'email', 'password'];
-    protected $hidden = ['password', 'remember_token'];
-    protected $casts = ['password' => 'hashed'];
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 }

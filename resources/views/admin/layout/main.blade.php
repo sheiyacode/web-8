@@ -63,6 +63,7 @@ https://templatemo.com/tm-586-scholar
   <!-- ***** Header Area End ***** -->
 
 @yield('content')
+@stack('scripts')
 
 @include('admin.component.footer')
 

@@ -38,8 +38,16 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+    public function courses()
+    {
+        return $this->belongsToMany(\App\Models\Course::class, 'course_user')->withTimestamps();
+    }
+
+    // Misalnya kamu punya kolom boolean bernama "has_completed_course"
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'has_completed_course' => 'boolean',
     ];
+
 }

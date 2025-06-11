@@ -2,10 +2,6 @@
 
 @section('content')
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
-
 @if ($errors->any())
   <div class="alert alert-danger">
     <ul class="mb-0">
@@ -26,7 +22,7 @@
       </div>
       <div class="col-lg-6">
         <div class="contact-us-content">
-          <form id="contact-form" action="{{ route('login.admin') }}" method="POST">
+          <form id="contact-form" action="{{ route('login.admin.submit') }}" method="POST">
             @csrf
             <input type="hidden" name="role" value="admin">
 
