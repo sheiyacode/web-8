@@ -15,15 +15,20 @@ class Course extends Model
         'image',
         'tutor_id',
     ];
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'course_user');
+    }
+
 
     public function tutor()
     {
         return $this->belongsTo(Tutor::class, 'tutor_id');
     }
     // Relasi ke user
-    public function users()
+    public function userCourses()
     {
-        return $this->belongsToMany(User::class,'course_user');
+        return $this->hasMany(UserCourse::class);
     }
 
     public function quizzes()

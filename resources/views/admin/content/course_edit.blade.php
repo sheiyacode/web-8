@@ -25,6 +25,12 @@
             @endif
             <input type="file" name="image" class="form-control" accept="image/*">
         </div>
+        
+        <div class="mb-3">
+            <label for="duration" class="form-label">Durasi Kursus</label>
+            <input type="text" name="duration" class="form-control" id="duration" value="{{ old('duration') }}" placeholder="Contoh: 3 Bulan" required>
+        </div>
+
 
         <div class="mb-3">
             <label>Pilih Tutor</label>

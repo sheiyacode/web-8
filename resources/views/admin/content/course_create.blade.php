@@ -28,6 +28,11 @@
         </div>
 
         <div class="mb-3">
+            <label for="duration" class="form-label">Durasi Kursus</label>
+            <input type="text" name="duration" class="form-control" id="duration" value="{{ old('duration') }}" placeholder="Contoh: 3 Bulan" required>
+        </div>
+
+        <div class="mb-3">
             <label for="tutor_id" class="form-label">Pilih Tutor</label>
             <select name="tutor_id" class="form-select" required>
                 <option value="">-- Pilih Tutor --</option>

@@ -29,7 +29,9 @@ class AdminCourseController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'tutor_id' => 'required|exists:tutors,id',
+            
         ]);
+        
 
         $filename = null;
         if ($request->hasFile('image')) {

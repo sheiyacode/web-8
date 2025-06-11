@@ -109,6 +109,18 @@ img {
   overflow: hidden;
 }
 
+/*tambahan*/
+.btn-primary {
+    background-color: #7a6ad8;
+    border-color: #7a6ad8;
+}
+
+.btn-outline-primary {
+    color: #7a6ad8;
+    border-color: #7a6ad8;
+}
+
+
 /* 
 ---------------------------------------------
 Global Styles

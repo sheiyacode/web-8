@@ -9,17 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
+    public function up(): void
+    {
     Schema::create('quizzes', function (Blueprint $table) {
         $table->id();
+        $table->foreignId('course_id')->constrained()->onDelete('cascade');
         $table->string('title');
-        $table->text('description')->nullable();
-        $table->foreignId('course_id')->constrained()->onDelete('cascade'); // relasi ke courses
+        $table->text('question');
+        $table->json('options'); // simpan pilihan A/B/C/D dalam format JSON
+        $table->string('correct_answer'); // misal 'A', 'B', dll
         $table->timestamps();
     });
-}
-
+    }
 
     /**
      * Reverse the migrations.

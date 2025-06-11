@@ -10,13 +10,24 @@ class Quiz extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
         'course_id',
+        'title',
+        'question',
+        'options',
+        'correct_answer',
+    ];
+
+    protected $casts = [
+        'options' => 'array',
     ];
 
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function results()
+    {
+        return $this->hasMany(QuizResult::class);
     }
 }
