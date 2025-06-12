@@ -17,14 +17,18 @@
                     </div>
                     <!-- ***** Serach Start ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                      <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                      <li class="scroll-to-section"><a href="#about-us">About Us</a></li>
-                      <li class="scroll-to-section"><a href="#team">Team</a></li>
-                      <li class="scroll-to-section"><a href="#testimonial">Testi</a></li>
-                      <li class="scroll-to-section"><a href="#course">Course</a></li>
-                      <li><a href="{{ route('login.choose') }}">Join Now!</a></li>
-                  </ul>   
+                      <ul class="nav">
+                        <li><a href="{{ route('dashboard.tutor') }}">Dashboard</a></li>
+                        <li><a href="{{ route('tutor.courses') }}">Course</a></li>
+                        <li><a href="{{ route('tutor.quizzes.index') }}">Quiz</a></li>
+                        <li><a href="{{ route('tutor.students') }}">Student</a></li>
+                        <li>
+                          <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="logout-button">Logout</button>
+                          </form>
+                        </li>
+                      </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>

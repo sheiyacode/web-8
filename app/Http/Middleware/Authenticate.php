@@ -18,7 +18,7 @@ class Authenticate extends Middleware
             } elseif ($request->is('tutor/*')) {
                 return route('login.tutor');
             } elseif ($request->is('user/*')) {
-                return route('login'); // karena kamu sudah punya: Route::get('login/user')->name('login')
+                return route('login.user'); // karena kamu sudah punya: Route::get('login/user')->name('login')
             } else {
                 return route('login.choose'); // fallback ke halaman pemilihan role
             }

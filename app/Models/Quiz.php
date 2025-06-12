@@ -11,23 +11,22 @@ class Quiz extends Model
 
     protected $fillable = [
         'course_id',
-        'title',
+        'week',
         'question',
-        'options',
+        'option_a',
+        'option_b',
+        'option_c',
+        'option_d',
         'correct_answer',
     ];
 
-    protected $casts = [
-        'options' => 'array',
-    ];
 
     public function course()
     {
         return $this->belongsTo(Course::class);
     }
-
-    public function results()
+    public function questions()
     {
-        return $this->hasMany(QuizResult::class);
+        return $this->hasMany(QuizQuestion::class);
     }
 }

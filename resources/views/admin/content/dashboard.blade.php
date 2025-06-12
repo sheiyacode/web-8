@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container" style="margin-top: 100px;">
-    <h2>Welcome Back, Admin!</h2>
 
 <div class="container my-5">
   <div class="row text-center">

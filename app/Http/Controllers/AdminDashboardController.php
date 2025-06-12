@@ -50,18 +50,32 @@ class AdminDashboardController extends Controller
         $users = User::with('courses')->get();
         return view('admin.content.user',compact('users'));
     }
+    public function editUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.content.user_edit', compact('user')); 
+    }
+    public function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('success', 'Siswa berhasil dihapus.');
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return redirect()->route('admin.users')->with('success', 'Data siswa berhasil diperbarui.');
+    }
 
     public function tutor()
     {
-        $tutors = Tutor::all(); // ambil semua data tutor dari tabel tutors
+        $tutors = Tutor::all();
         return view('admin.content.tutor',compact('tutors'));
     }
-
-    public function quiz()
-    {
-        return view('admin.content.quiz');
-    }
-
     public function createTutor()
     {
         return view('admin.content.tutor_create');
@@ -82,5 +96,42 @@ class AdminDashboardController extends Controller
 
         return redirect()->route('admin.tutors')->with('success', 'Tutor berhasil ditambahkan!');
     }
+    public function editTutor($id)
+    {
+        $tutor = Tutor::findOrFail($id);
+        return view('admin.content.tutor_edit', compact('tutor'));
+    }
+
+    public function updateTutor(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:tutors,email,' . $id,
+        ]);
+
+        $tutor = Tutor::findOrFail($id);
+        $tutor->name = $request->name;
+        $tutor->email = $request->email;
+
+        if ($request->filled('password')) {
+            $tutor->password = Hash::make($request->password);
+        }
+
+        $tutor->save();
+
+    return redirect()->route('admin.tutors')->with('success', 'Tutor berhasil diperbarui!');
+    }
+
+    public function deleteTutor($id)
+    {
+        Tutor::findOrFail($id)->delete();
+        return redirect()->route('admin.tutors')->with('success', 'Tutor berhasil dihapus!');
+    }
+
+        public function quiz()
+    {
+        return view('admin.content.quiz');
+    }
+
 
 }

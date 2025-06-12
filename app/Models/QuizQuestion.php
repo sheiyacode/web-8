@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuizResult extends Model
+class QuizQuestion extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'course_id', 'week', 'score'];
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
 }

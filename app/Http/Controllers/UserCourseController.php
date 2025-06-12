@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class UserCourseController extends Controller
 {
@@ -22,5 +25,16 @@ class UserCourseController extends Controller
         $courses = $user->courses; // atau ->courses()->get()
 
         return view('user.content.my_courses', compact('course'));
+    }
+    public function selectCourse(Request $request)
+    {
+        $user = auth()->user();
+
+        dd($user); // ini akan menunjukkan apakah benar instance model User
+
+        $user->course_id = $request->course_id;
+        $user->save();
+
+        return back();
     }
 }

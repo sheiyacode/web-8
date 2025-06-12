@@ -27,7 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'selected_package', // pastikan field ini ada
+        'selected_package',
+        'course_id', // pastikan field ini ada
     ];
 
     protected $hidden = [
@@ -45,4 +46,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class, 'course_user')->withPivot('progress');
     }
+    
 }

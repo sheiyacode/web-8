@@ -29,6 +29,7 @@ class AdminCourseController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'tutor_id' => 'required|exists:tutors,id',
+            'duration' => 'required|string|max:50',
             
         ]);
         
@@ -43,6 +44,7 @@ class AdminCourseController extends Controller
             'description' => $request->description,
             'image' => $filename,
             'tutor_id' => $request->tutor_id,
+            'duration' => $request->duration,
         ]);
 
         return redirect()->route('admin.course')->with('success', 'Kursus berhasil ditambahkan.');
@@ -65,6 +67,7 @@ class AdminCourseController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'tutor_id' => 'required|exists:tutors,id',
+            'duration' => 'required|string|max:50',
         ]);
 
         $course = Course::findOrFail($id);
@@ -78,6 +81,7 @@ class AdminCourseController extends Controller
         $course->description = $request->description;
         $course->tutor_id = $request->tutor_id;
         $course->class = $request->class;
+        $course->duration = $request->duration;
         $course->save();
 
         return redirect()->route('admin.course')->with('success', 'Kursus berhasil diperbarui.');

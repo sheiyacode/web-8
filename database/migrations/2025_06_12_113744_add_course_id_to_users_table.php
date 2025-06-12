@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('quiz_results', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->integer('score');
-        $table->timestamps();
-    });
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('course_id')->nullable()->after('id');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
+        });
     }
 
     /**
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quiz_results');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
