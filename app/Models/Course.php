@@ -19,10 +19,9 @@ class Course extends Model
     ];
     public function users()
     {
-        return $this->belongsToMany(User::class, 'course_user')
-                    ->withPivot('created_at') // agar bisa ambil waktu pendaftaran
-                    ->withTimestamps();
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id');
     }
+
     public function tutor()
     {
         return $this->belongsTo(Tutor::class);

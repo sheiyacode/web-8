@@ -47,21 +47,21 @@ Route::post('login/admin', [AuthController::class, 'login'])->name('login.admin.
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // User dashboard
-Route::middleware(['auth', 'isUser'])->prefix('user')->group(function () {
+Route::middleware(['auth:user', 'isUser'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'dashboard'])->name('dashboard.user');
     Route::get('/courses', [UserDashboardController::class, 'courses'])->name('user.courses');
     Route::get('/quiz', [UserDashboardController::class, 'quiz'])->name('user.quiz');
     Route::get('/certificate', [UserDashboardController::class, 'certificate'])->name('user.certificate');
     Route::get('/profile', [UserDashboardController::class, 'profile'])->name('user.profile');
+  //Route::post('/select-course/{courseId}', [UserDashboardController::class, 'store'])->name('user.select.package');
     //Route::post('/select-package', [UserDashboardController::class, 'selectPackage'])->name('user.select.package');
 });
 
 Route::middleware(['auth:user'])->prefix('user')->group(function () {
-    
     Route::get('/courses/available', [UserCourseController::class, 'available'])->name('user.courses.available');
+    Route::post('/select-course/{course}', [UserCourseController::class, 'store'])->name('user.select.package');
     Route::get('/courses/my', [UserCourseController::class, 'myCourses'])->name('user.courses.my');
-    Route::post('/select-course', [UserCourseController::class, 'selectCourse'])->name('user.select.package');
-
+    
 });
 
 // Admin dashboard

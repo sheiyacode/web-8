@@ -46,6 +46,41 @@ class AuthController extends Controller
         return view('auth.login_tutor', ['role' => 'tutor']);
     }
 
+    // public function login(Request $request)
+    // {
+    //     $guard = null;
+
+    //     // Cek dari URL atau input role
+    //     if (str_contains($request->url(), 'admin')) {
+    //         $guard = 'admin';
+    //     } elseif (str_contains($request->url(), 'tutor')) {
+    //         $guard = 'tutor';
+    //     } else {
+    //         $guard = 'user';
+    //     }
+
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard($guard)->attempt($credentials)) {
+    //         $request->session()->regenerate();
+
+    //         // Redirect berdasarkan guard
+    //         switch ($guard) {
+    //             case 'admin':
+    //                 return redirect()->route('dashboard.admin');
+    //             case 'tutor':
+    //                 return redirect()->route('dashboard.tutor');
+    //             default:
+    //                 return redirect()->route('dashboard.user');
+    //         }
+    //     }
+
+    //     return back()->withErrors([
+    //         'email' => 'Login gagal. Cek kembali email dan password.',
+    //     ]);
+    // }
+
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -92,7 +127,7 @@ class AuthController extends Controller
             return back()->withErrors(['email' => 'Email user tidak ditemukan.'])->withInput();
         }
 
-        if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::guard('user')->attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
             return redirect()->route('dashboard.user');
         }

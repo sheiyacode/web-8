@@ -43,11 +43,13 @@
 <!-- ====== Course Section ====== -->
 <section class="py-5 bg-light">
     <div class="container">
-        @if($activeCourse)
+        @if ($activeCourse)
+            <h4 class="mb-3">Kursus Aktif Saya</h4>
             <div class="card shadow-sm mb-4 border-0">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $activeCourse->course->title }}</h5>
-                    <p class="card-text">{{ $activeCourse->course->description }}</p>
+                    <h5 class="card-title">{{ $activeCourse->title }}</h5>
+                    <p class="card-text">{{ $activeCourse->description }}</p>
+                    <p class="mb-2"><strong>Progres:</strong> Modul ke-{{ $progress ?? 1 }}</p>
                     <a href="#" class="btn btn-primary">Lanjut Belajar</a>
                 </div>
             </div>
@@ -60,9 +62,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $course->title }}</h5>
                                 <p class="card-text">{{ Str::limit($course->description, 100) }}</p>
-                                <form method="POST" action="{{ route('user.select.package') }}">
+                                <form method="POST" action="{{ route('user.select.package', $course->id) }}">
                                     @csrf
-                                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                    <input type="hidden" name="package" value="{{ $course->title }}">
                                     <button class="btn btn-outline-primary btn-sm">Ambil Kursus Ini</button>
                                 </form>
                             </div>

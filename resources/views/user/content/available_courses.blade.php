@@ -1,7 +1,12 @@
 @extends('user.layout.main')
 
 @section('content')
-<div class="container mt-4">
+<form action="{{ route('user.select.package',$course->id)}}" method="POST">
+    @csrf
+    <input type="hidden" name="package" value="{{ $course->title }}">
+    <button type="submit" class="btn btn-primary">Pilih kursus ini</button>
+<form>
+{{-- <div class="container mt-4">
     <h2>Daftar Kursus Tersedia</h2>
     <div class="row">
         @foreach($courses as $course)
@@ -19,5 +24,5 @@
         </div>
         @endforeach
     </div>
-</div>
+</div> --}}
 @endsection

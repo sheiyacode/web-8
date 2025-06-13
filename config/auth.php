@@ -36,12 +36,12 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        
+        'user' => [ // tambahkan ini
             'driver' => 'session',
             'provider' => 'users',
         ],
-        
-        'user' => [ // tambahkan ini
+        'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],

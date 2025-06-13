@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Models\UserCourse;
 
 
 class UserCourseController extends Controller
@@ -14,7 +16,15 @@ class UserCourseController extends Controller
     // Semua kursus yang tersedia
     public function available()
     {
-        $courses = Course::with('tutor')->get(); // atau filter tertentu
+        $user = Auth::guard('user')->user();
+
+        // Hanya tampilkan kursus kalau belum memilih
+        if ($user->courses()->exists()) {
+            return redirect()->route('user.courses.my')
+                ->with('info', 'Kamu sudah memilih kursus.');
+        }
+
+        $courses = Course::with('tutor')->get();
         return view('user.content.available_courses', compact('courses'));
     }
 
@@ -24,17 +34,54 @@ class UserCourseController extends Controller
         $user = auth()->user();
         $courses = $user->courses; // atau ->courses()->get()
 
-        return view('user.content.my_courses', compact('course'));
+    return view('user.content.my_courses', compact('courses'));
+
     }
-    public function selectCourse(Request $request)
+
+    public function store(Request $request, $courseId)
     {
-        $user = auth()->user();
+        $userId = auth()->id();
 
-        dd($user); // ini akan menunjukkan apakah benar instance model User
+        // Cek apakah sudah punya kursus aktif
+        $existing = UserCourse::where('user_id', $userId)->where('status', 'active')->first();
+        if ($existing) {
+            return redirect()->back()->with('error', 'Kamu sudah memiliki kursus aktif.');
+        }
 
-        $user->course_id = $request->course_id;
-        $user->save();
+        UserCourse::create([
+            'user_id' => $userId,
+            'course_id' => $courseId,
+            'status' => 'active',
+            'progress' => 1,
+        ]);
 
-        return back();
+        return redirect()->route('dashboard.user')->with('success', 'Kursus berhasil diambil!');
     }
+    // public function selectCourse(Request $request, Course $course)
+    // {
+    //     $request->validate([
+    //         'package' => ['required']
+    //     ]);
+
+    //     $user = auth()->user();
+
+    //     // Simpan paket yang dipilih user
+    //     $user->selected_package = $request->package;
+    //     $user->save();
+
+    //     // Cari kursus yang sesuai paket (admin sudah buat sebelumnya)
+    //     $course = Course::where('title', 'like', $request->package . '%')->first();
+
+    //     if ($course) {
+    //         // Cegah user memilih lebih dari satu kursus
+    //         if (!$user->courses()->where('course_id', $course->id)->exists()) {
+    //             $user->courses()->attach($course->id);
+    //         }
+    //     } else {
+    //         return back()->with('error', 'Kursus untuk paket tersebut belum tersedia. Hubungi admin.');
+    //     }
+
+    //     return redirect()->route('user.courses')->with('success', 'Paket berhasil dipilih!');
+    // }
+
 }

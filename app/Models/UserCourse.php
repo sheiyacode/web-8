@@ -25,5 +25,6 @@ class UserCourse extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
 }
 
